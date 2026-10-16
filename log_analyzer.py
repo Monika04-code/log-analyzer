@@ -1,12 +1,3 @@
-"""Log Analyzer
-
-Reads a web server access log (Common Log Format) and prints a summary:
-- total requests and transferred data
-- requests by status class (2xx, 3xx, 4xx, 5xx)
-- most active IP addresses and most requested URLs
-- errors (4xx and 5xx) per hour
-Optionally saves the same report as a JSON file. Uses only the standard library.
-"""
 import argparse
 import json
 import re
@@ -27,7 +18,6 @@ def parse_line(line):
         return None
     data = match.groupdict()
     data["size"] = 0 if data["size"] == "-" else int(data["size"])
-    # time looks like 10/Oct/2026:13:55:36 +0200 -> hour is "13"
     data["hour"] = data["time"].split(":")[1]
     return data
 
